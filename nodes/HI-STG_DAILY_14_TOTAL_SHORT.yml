@@ -3,11 +3,11 @@ steps:
     operation:
       config:
         insertStrategy: INSERT
-        postSQL: ""
-        preSQL: ""
+        postSQL: describe table {{ ref('HI', 'STG_CUSTOMER_BABABOOEY_UNDERWATERBOOGIEBABA') }}
+        preSQL: describe table {{ ref('HI', 'STG_PART') }}
         testsEnabled: true
         truncateBefore: true
-      database: ""
+      database: NOLAN_DB
       deployEnabled: true
       description: ""
       isMultisource: false
@@ -43,19 +43,26 @@ steps:
         cteString: ""
         enabledColumnTestIDs: []
         sourceMapping:
-          - aliases: {}
+          - aliases:
+              DAILY_14_TOTAL_SHORT: 2d3a739a-65c4-45a5-a2c4-27c7796b8ce9
             customSQL:
               customSQL: ""
             dependencies:
               - locationName: HEY
                 nodeName: DAILY_14_TOTAL_SHORT
+              - locationName: HI
+                nodeName: STG_CUSTOMER_BABABOOEY_UNDERWATERBOOGIEBABA
+              - locationName: HI
+                nodeName: STG_PART
             join:
-              joinCondition: FROM {{ ref('HEY', 'DAILY_14_TOTAL_SHORT') }} "DAILY_14_TOTAL_SHORT"
+              joinCondition: "FROM {{ ref('HEY', 'DAILY_14_TOTAL_SHORT') }} \"DAILY_14_TOTAL_SHORT\" "
             name: STG_DAILY_14_TOTAL_SHORT
-            noLinkRefs: []
+            noLinkRefs:
+              - locationName: HI
+                nodeName: STG_DAILY_14_TOTAL_SHORT
       name: STG_DAILY_14_TOTAL_SHORT
       overrideSQL: false
-      schema: ""
+      schema: STAGE
       sqlType: Stage
       type: sql
     stepCounter: 1775ca6c-6ab1-4472-a39f-756702f744a6

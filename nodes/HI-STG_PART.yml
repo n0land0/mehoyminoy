@@ -127,16 +127,23 @@ steps:
         cteString: ""
         enabledColumnTestIDs: []
         sourceMapping:
-          - aliases: {}
+          - aliases:
+              PART: 11b257cb-82e0-4dc9-a3a5-6be8f42dd3f9
             customSQL:
               customSQL: ""
             dependencies:
               - locationName: HEY
                 nodeName: PART
+              - locationName: HEY
+                nodeName: PART
             join:
               joinCondition: FROM {{ ref('HEY', 'PART') }} "PART"
             name: STG_PART
-            noLinkRefs: []
+            noLinkRefs:
+              - locationName: HI
+                nodeName: STG_PART
+              - locationName: HI
+                nodeName: STG_PART
       name: STG_PART
       overrideSQL: false
       schema: STAGE

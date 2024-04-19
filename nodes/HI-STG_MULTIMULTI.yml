@@ -172,16 +172,19 @@ steps:
                 transform: ""
         enabledColumnTestIDs: []
         sourceMapping:
-          - aliases: {}
+          - aliases:
+              SUPPLIER: 29a3b79c-3cfa-420b-a48a-8049fbbc72bb
             customSQL:
               customSQL: ""
             dependencies:
               - locationName: HEY
                 nodeName: SUPPLIER
             join:
-              joinCondition: FROM {{ ref('HEY', 'SUPPLIER') }} "SUPPLIER"
+              joinCondition: "FROM {{ ref('HEY', 'SUPPLIER') }} \"SUPPLIER\" "
             name: SRC1
-            noLinkRefs: []
+            noLinkRefs:
+              - locationName: HI
+                nodeName: STG_MULTIMULTI
           - aliases:
               NATION: 240a344f-f50b-4b19-8311-ea252f70793b
             customSQL:
@@ -192,7 +195,9 @@ steps:
             join:
               joinCondition: FROM {{ ref('HEY', 'NATION') }} "NATION"
             name: SRC2
-            noLinkRefs: []
+            noLinkRefs:
+              - locationName: HI
+                nodeName: STG_MULTIMULTI
       name: STG_MULTIMULTI
       overrideSQL: false
       schema: STAGE

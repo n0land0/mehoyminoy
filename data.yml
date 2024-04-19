@@ -6,11 +6,15 @@ jobs:
     id: 2
     includeSelector: "{ location: HEY name: ORDERS } OR { location: HEY name: PART } OR { location: HEY name: SUPPLIER } OR { location: HEY name: STG_CUSTOMER } OR { location: HI name: STG_MULTIMULTI } OR { location: HEY name: STG_ORDERS } OR { location: HI name: STG_PART } OR { location: HI name: STG_SUPPLIER } OR { location: HI name: STG_CUSTOMER } OR { location: HI name: STG_CUSTOMER1 }"
     name: New Job
+    steps: []
+    subgraphs: []
   Job-3:
     excludeSelector: ""
     id: 3
     includeSelector: ""
     name: New Job
+    steps: []
+    subgraphs: []
 locations:
   HEY:
     mappingDefinitions:
@@ -140,6 +144,8 @@ stepTypes:
                         {% endif %}
                     {% endif %}
                 {% endfor %}
+
+            describe table {{ ref('HI', 'STG_CUSTOMER_BABABOOEY_UNDERWATERBOOGIEBABA') }}
 
             {% endif %}
         run:

@@ -12,7 +12,7 @@ steps:
       description: ""
       isMultisource: false
       locationName: HI
-      materializationType: table
+      materializationType: view
       metadata:
         appliedNodeTests: []
         columns:
@@ -55,19 +55,24 @@ steps:
         cteString: ""
         enabledColumnTestIDs: []
         sourceMapping:
-          - aliases: {}
+          - aliases:
+              REGION: c47c3ad2-7942-4783-82ba-5736e0203e68
             customSQL:
               customSQL: ""
             dependencies:
               - locationName: HEY
                 nodeName: REGION
+              - locationName: HI
+                nodeName: STG_CUSTOMER_BABABOOEY_UNDERWATERBOOGIEBABA
             join:
-              joinCondition: FROM {{ ref('HEY', 'REGION') }} "REGION"
+              joinCondition: "FROM {{ ref('HEY', 'REGION') }} \"REGION\" "
             name: STG_REGION
-            noLinkRefs: []
+            noLinkRefs:
+              - locationName: HI
+                nodeName: STG_REGION
       name: STG_REGION
       overrideSQL: false
       schema: ""
-      sqlType: Stage
+      sqlType: "3"
       type: sql
     stepCounter: a77e282b-428c-483d-8da1-7bcd64ef56fa

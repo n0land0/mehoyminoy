@@ -1,0 +1,125 @@
+steps:
+  V_PARTSUPP-c8e3fa66-e5c1-43c7-8f87-8ca8e1944ad1:
+    operation:
+      config:
+        insertStrategy: UNION
+        selectDistinct: false
+      database: ""
+      deployEnabled: true
+      description: ""
+      isMultisource: true
+      locationName: HEY
+      materializationType: view
+      metadata:
+        appliedNodeTests: []
+        columns:
+          - columnReference:
+              columnCounter: 6daa04d5-6e04-45ea-b56b-0738bf25a8f6
+              stepCounter: c8e3fa66-e5c1-43c7-8f87-8ca8e1944ad1
+            dataType: NUMBER(38,0)
+            description: Foreign Key to P_PARTKEY
+            name: PS_PARTKEY
+            nullable: false
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: 77fd6e4b-57af-43ae-a235-60eae0c537c9
+                    stepCounter: d52f9542-1d67-44d1-b11c-d13fb4b978bd
+                transform: ""
+              - columnReferences:
+                  - columnCounter: 48fe8e34-6e3a-45e0-84ca-fb7cfdb18e8d
+                    stepCounter: c7b24db3-b550-4144-896e-1972c2daa16a
+                transform: ""
+          - columnReference:
+              columnCounter: 6ed4f07d-a7dd-48ee-84ed-d2298d282a6f
+              stepCounter: c8e3fa66-e5c1-43c7-8f87-8ca8e1944ad1
+            dataType: NUMBER(38,0)
+            description: Foreign Key to S_SUPPKEY
+            name: PS_SUPPKEY
+            nullable: false
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: 25d61871-d4a3-4625-ac25-a1f6ad57bc9e
+                    stepCounter: d52f9542-1d67-44d1-b11c-d13fb4b978bd
+                transform: ""
+              - columnReferences:
+                  - columnCounter: 109c8e3c-14fa-4727-859f-d116663fc2e1
+                    stepCounter: c7b24db3-b550-4144-896e-1972c2daa16a
+                transform: ""
+          - columnReference:
+              columnCounter: 112cfb74-ee4a-4e99-b46a-4c69602dd5a8
+              stepCounter: c8e3fa66-e5c1-43c7-8f87-8ca8e1944ad1
+            dataType: NUMBER(38,0)
+            description: ""
+            name: PS_AVAILQTY
+            nullable: false
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: b0c67317-14a9-48d3-b089-a6a94a15d811
+                    stepCounter: d52f9542-1d67-44d1-b11c-d13fb4b978bd
+                transform: ""
+              - columnReferences:
+                  - columnCounter: d9af5c35-a03d-43ff-a5ce-af1403331e45
+                    stepCounter: c7b24db3-b550-4144-896e-1972c2daa16a
+                transform: ""
+          - columnReference:
+              columnCounter: e1372d69-855d-480f-8017-bcb2ea6c2230
+              stepCounter: c8e3fa66-e5c1-43c7-8f87-8ca8e1944ad1
+            dataType: NUMBER(12,2)
+            description: ""
+            name: PS_SUPPLYCOST
+            nullable: false
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: 242452dc-c21b-4dfd-9d4e-d39fa12a86a6
+                    stepCounter: d52f9542-1d67-44d1-b11c-d13fb4b978bd
+                transform: ""
+              - columnReferences:
+                  - columnCounter: 6cdb01ef-a479-419a-bae3-6aa25a7e6213
+                    stepCounter: c7b24db3-b550-4144-896e-1972c2daa16a
+                transform: ""
+          - columnReference:
+              columnCounter: db8a9857-e6df-42d9-b869-4890b1308d43
+              stepCounter: c8e3fa66-e5c1-43c7-8f87-8ca8e1944ad1
+            dataType: VARCHAR(199)
+            description: ""
+            name: PS_COMMENT
+            nullable: true
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: 6688d171-bdb3-484c-a285-97deef54b7c5
+                    stepCounter: d52f9542-1d67-44d1-b11c-d13fb4b978bd
+                transform: ""
+              - columnReferences:
+                  - columnCounter: ac08475d-0a46-47f6-b01c-f734b2ba640e
+                    stepCounter: c7b24db3-b550-4144-896e-1972c2daa16a
+                transform: ""
+        enabledColumnTestIDs: []
+        sourceMapping:
+          - aliases:
+              STG_PARTSUPP: d52f9542-1d67-44d1-b11c-d13fb4b978bd
+            customSQL:
+              customSQL: ""
+            dependencies:
+              - locationName: HI
+                nodeName: STG_PARTSUPP
+            join:
+              joinCondition: FROM {{ ref('HI', 'STG_PARTSUPP') }} "STG_PARTSUPP"
+            name: src1
+            noLinkRefs: []
+          - aliases:
+              STG_PARTSUPP1: c7b24db3-b550-4144-896e-1972c2daa16a
+            customSQL:
+              customSQL: ""
+            dependencies:
+              - locationName: HI
+                nodeName: STG_PARTSUPP1
+            join:
+              joinCondition: FROM {{ ref('HI', 'STG_PARTSUPP1') }} "STG_PARTSUPP1"
+            name: src2
+            noLinkRefs: []
+      name: V_PARTSUPP
+      overrideSQL: false
+      schema: ""
+      sqlType: View
+      type: sql
+    stepCounter: c8e3fa66-e5c1-43c7-8f87-8ca8e1944ad1
