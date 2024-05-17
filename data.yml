@@ -142,19 +142,8 @@ stepTypes:
                 {% endif %}
             {% endfor %}
 
-            {{ stage('Create target table') }}
-            CREATE OR REPLACE TABLE {{ ns.node_database }}.{{ ns.node_schema }}.{{ target_table }}
-
-            (
-            {% for column in sources[0].columns %}
-                {% if column.name == 'foo' %}
-                    {{ column.name }} INT AUTOINCREMENT START 1 INCREMENT 1
-                {%- else %}
-                    {{ column.name }} {{ column.dataType }}
-                {%- endif %}
-                {%- if not loop.last -%}, {%- endif %}
-            {% endfor %}
-            )
+            {{ stage('bad thing') }}
+            PRINT {{ sources[0].join }}
 
             ;
         run:
