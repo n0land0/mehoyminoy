@@ -157,33 +157,6 @@ stepTypes:
             )
 
             ;
-
-            {{ stage('Initial values') }}
-            INSERT INTO {{ ns.node_database }}.{{ ns.node_schema }}.{{ target_table }}
-
-            (
-                {%- for column in sources[0].columns %}
-                    {% if column.name!= 'foo' %}
-                        {{ column.name }}
-                    {% if not loop.last %}, {% endif %}
-                    {%- endif %}
-                {%- endfor %}
-            )
-
-            SELECT
-
-                {%- for column in sources[0].columns %}
-                    {% if column.name!= 'foo' %}
-                        {% if column.transform!= "" %}
-                            {{ column.transform }} AS {{ column.name }}
-                        {%- else %}
-                            {{ column.name }}
-                        {%- endif %}
-                    {% if not loop.last %}, {% endif %}
-                    {%- endif %}
-                {%- endfor %}
-                
-                {{ sources[0].join }}
         run:
           templateString: ""
     name: "5"
