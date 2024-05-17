@@ -120,13 +120,9 @@ steps:
               - locationName: HI
                 nodeName: STG_CUSTOMER
             join:
-              joinCondition: |-
-                FROM {{ ref('HI', 'STG_CUSTOMER') }} "STG_CUSTOMER"
-                WHERE "C_COMMENT" > (SELECT 1 FROM {{ ref_no_link('BLERGH', 'STG_STG_STG_CUSTOMER1') }})
+              joinCondition: FROM {{ ref('HI', 'STG_CUSTOMER') }} "STG_CUSTOMER"
             name: V_STG_CUSTOMER
-            noLinkRefs:
-              - locationName: BLERGH
-                nodeName: STG_STG_STG_CUSTOMER1
+            noLinkRefs: []
       name: V_STG_CUSTOMER
       overrideSQL: false
       schema: ""
