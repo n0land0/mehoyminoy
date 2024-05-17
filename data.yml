@@ -68,11 +68,9 @@ stepTypes:
       templates:
         create:
           templateString: |
-            {%- set target_table = node.name -%}
+            {%- set target_view = node.name -%}
             {%- set node_location = node.location.name -%}
-
             {% set ns = namespace(node_database=None, node_schema=None) %}
-
             {% for location in storageLocations %}
                 {% if location.name == node_location %}
                     {%- set ns.node_database = location.database -%}
@@ -80,47 +78,12 @@ stepTypes:
                 {% endif %}
             {% endfor %}
 
-            {{ stage('Create target table') }}
-            CREATE OR REPLACE TABLE {{ ns.node_database }}.{{ ns.node_schema }}.{{ target_table }}
-
-            (
-            {% for column in sources[0].columns %}
-                {% if column.name == 'foo' %}
-                    {{ column.name }} INT AUTOINCREMENT START 1 INCREMENT 1
-                {%- else %}
-                    {{ column.name }} {{ column.dataType }}
-                {%- endif %}
-                {%- if not loop.last -%}, {%- endif %}
-            {% endfor %}
-            )
-
-            ;
-
-            {{ stage('Initial values') }}
-            INSERT INTO {{ ns.node_database }}.{{ ns.node_schema }}.{{ target_table }}
-
-            (
-                {%- for column in sources[0].columns %}
-                    {% if column.name!= 'foo' %}
-                        {{ column.name }}
-                    {% if not loop.last %}, {% endif %}
-                    {%- endif %}
-                {%- endfor %}
-            )
-
-            SELECT
-
-                {%- for column in sources[0].columns %}
-                    {% if column.name!= 'foo' %}
-                        {% if column.transform!= "" %}
-                            {{ column.transform }} AS {{ column.name }}
-                        {%- else %}
-                            {{ column.name }}
-                        {%- endif %}
-                    {% if not loop.last %}, {% endif %}
-                    {%- endif %}
-                {%- endfor %}
-                
+            {{ stage('Create Stage View') }}   
+            CREATE OR REPLACE VIEW {{ ns.node_database }}.{{ ns.node_schema }}.{{ target_view}}
+            COMMENT = 'foo'
+            AS
+                SELECT 
+                    C_NAME
                 {{ sources[0].join }}
         run:
           templateString: ""
