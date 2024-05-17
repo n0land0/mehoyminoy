@@ -126,35 +126,61 @@ stepTypes:
         plural: New Types
       templates:
         create:
-          templateString: |-
-            {%- set target_view = node.name -%}
+          templateString: |
+            {%- set target_table = node.name -%}
             {%- set node_location = node.location.name -%}
+
             {% set ns = namespace(node_database=None, node_schema=None) %}
+
             {% for location in storageLocations %}
                 {% if location.name == node_location %}
                     {%- set ns.node_database = location.database -%}
                     {%- set ns.node_schema = location.schema -%}
                 {% endif %}
             {% endfor %}
-            {%- set double_quote = ''|safe -%}
-            {%- set single_quoted_double_quote = ' ~ double_quote ~ '|safe -%}
-            {{ stage('Create Stage View') }}   
-            CREATE OR REPLACE VIEW {{ ns.node_database }}.{{ ns.node_schema }}.{{ target_view}}
-            COMMENT = '{{ 'blah' }}'
-            AS
-                SELECT 
-                    C_NAME
-                {% if 'WHERE' in sources[0].join -%}
-                {{ sources[0].join | 
-                replace(
-                    'WHERE',
-                'JOIN LATERAL UTILS.LOGIC.PARSE_CSV(' ~ 'foo' ~ '::STRING,'  ~ quoted_delimiter ~ ', ' ~ single_quoted_double_quote ~ ')
-                    OVER (PARTITION BY FILENAME ORDER BY FILE_ROW_NUMBER) AS CSV_PARSER
-                WHERE'
-                ) }}
+
+            {{ stage('Create target table') }}
+            CREATE OR REPLACE TABLE {{ ns.node_database }}.{{ ns.node_schema }}.{{ target_table }}
+
+            (
+            {% for column in sources[0].columns %}
+                {% if column.name == 'foo' %}
+                    {{ column.name }} INT AUTOINCREMENT START 1 INCREMENT 1
                 {%- else %}
+                    {{ column.name }} {{ column.dataType }}
+                {%- endif %}
+                {%- if not loop.last -%}, {%- endif %}
+            {% endfor %}
+            )
+
+            ;
+
+            {{ stage('Initial values') }}
+            INSERT INTO {{ ns.node_database }}.{{ ns.node_schema }}.{{ target_table }}
+
+            (
+                {%- for column in sources[0].columns %}
+                    {% if column.name!= 'foo' %}
+                        {{ column.name }}
+                    {% if not loop.last %}, {% endif %}
+                    {%- endif %}
+                {%- endfor %}
+            )
+
+            SELECT
+
+                {%- for column in sources[0].columns %}
+                    {% if column.name!= 'foo' %}
+                        {% if column.transform!= "" %}
+                            {{ column.transform }} AS {{ column.name }}
+                        {%- else %}
+                            {{ column.name }}
+                        {%- endif %}
+                    {% if not loop.last %}, {% endif %}
+                    {%- endif %}
+                {%- endfor %}
+                
                 {{ sources[0].join }}
-                {%- endif -%}
         run:
           templateString: ""
     name: "5"
