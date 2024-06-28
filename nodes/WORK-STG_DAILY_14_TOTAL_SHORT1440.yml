@@ -1,0 +1,67 @@
+fileVersion: 1
+id: a84e4938-2332-48cf-855e-6e53011068c0
+name: STG_DAILY_14_TOTAL_SHORT1440
+operation:
+  config:
+    insertStrategy: INSERT
+    postSQL: ""
+    preSQL: ""
+    testsEnabled: true
+    truncateBefore: true
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: WORK
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a03b69cc-25d0-4c9e-a298-2373980063d8
+          stepCounter: a84e4938-2332-48cf-855e-6e53011068c0
+        config: {}
+        dataType: VARIANT
+        description: ""
+        name: V
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: c083e7b6-43ff-41e7-9cbd-6a2d0a4a8f9f
+                stepCounter: bab01d71-b679-47bd-9788-39dd95be9074
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 4a9fce6b-fe9a-4eae-b987-5283e50e0910
+          stepCounter: a84e4938-2332-48cf-855e-6e53011068c0
+        config: {}
+        dataType: TIMESTAMP_NTZ(9)
+        description: ""
+        name: T
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 4b96f671-eb8f-4fbe-bb64-fae962157d02
+                stepCounter: bab01d71-b679-47bd-9788-39dd95be9074
+            transform: ""
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases: {}
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: WORK
+            nodeName: STG_DAILY_14_TOTAL_SHORT539
+        join:
+          joinCondition: FROM {{ ref('WORK', 'STG_DAILY_14_TOTAL_SHORT539') }} "STG_DAILY_14_TOTAL_SHORT539"
+        name: STG_DAILY_14_TOTAL_SHORT1440
+        noLinkRefs: []
+  name: STG_DAILY_14_TOTAL_SHORT1440
+  overrideSQL: false
+  schema: ""
+  sqlType: Stage
+  type: sql
+  version: 1
+type: Node
