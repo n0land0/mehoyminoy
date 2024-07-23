@@ -1,0 +1,67 @@
+fileVersion: 1
+id: 5c838ad3-4671-45d4-9e6e-be57c68de7a5
+name: STG_DAILY_14_TOTAL_SHORT2
+operation:
+  config:
+    insertStrategy: INSERT
+    postSQL: ""
+    preSQL: ""
+    testsEnabled: true
+    truncateBefore: true
+  database: NOLAN_DB
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: HI
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: e73d7e4b-fcd0-4069-96dc-1aef5ab5de11
+          stepCounter: 5c838ad3-4671-45d4-9e6e-be57c68de7a5
+        config: {}
+        dataType: VARIANT
+        description: ""
+        name: V
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5df0eb46-186b-47ef-8e17-506d1546c9c8
+                stepCounter: a8c41ec9-13a5-4fdc-9882-731ae5a12109
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6b587efb-b5d9-4f8d-b8e7-6965ec2cc9ce
+          stepCounter: 5c838ad3-4671-45d4-9e6e-be57c68de7a5
+        config: {}
+        dataType: TIMESTAMP_NTZ(9)
+        description: ""
+        name: T
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: e866489f-aa41-4458-aec6-a80f61c1db96
+                stepCounter: a8c41ec9-13a5-4fdc-9882-731ae5a12109
+            transform: ""
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases: {}
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: HI
+            nodeName: STG_DAILY_14_TOTAL_SHORT
+        join:
+          joinCondition: FROM {{ ref('HI', 'STG_DAILY_14_TOTAL_SHORT') }} "STG_DAILY_14_TOTAL_SHORT"
+        name: STG_DAILY_14_TOTAL_SHORT2
+        noLinkRefs: []
+  name: STG_DAILY_14_TOTAL_SHORT2
+  overrideSQL: false
+  schema: STAGE
+  sqlType: Stage
+  type: sql
+  version: 1
+type: Node
