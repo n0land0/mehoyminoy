@@ -8,7 +8,7 @@ operation:
     preSQL: ""
     testsEnabled: true
     truncateBefore: true
-  database: ""
+  database: NOLAN_DB
   deployEnabled: true
   description: |-
     Orders are not present for all customers. In fact, one-third of the customers do not have any order in
@@ -149,19 +149,20 @@ operation:
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
-      - aliases: {}
+      - aliases:
+          CHORDERS: 4756709c-f755-48b5-8561-43c44092961b
         customSQL:
           customSQL: ""
         dependencies:
           - locationName: SAMPLE
-            nodeName: ORDERS
+            nodeName: CHORDERS
         join:
-          joinCondition: FROM {{ ref('SAMPLE', 'ORDERS') }} "ORDERS"
+          joinCondition: FROM {{ ref('SAMPLE', 'CHORDERS') }} "CHORDERS"
         name: STG_ORDERS1
         noLinkRefs: []
   name: STG_ORDERS1
   overrideSQL: false
-  schema: ""
+  schema: FRICK
   sqlType: Stage
   type: sql
   version: 1
