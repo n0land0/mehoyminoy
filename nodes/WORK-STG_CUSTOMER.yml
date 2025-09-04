@@ -1,0 +1,54 @@
+fileVersion: 1
+id: b2af582e-0050-4b03-b1ce-27dc5e8a3265
+name: STG_CUSTOMER
+operation:
+  config:
+    insertStrategy: INSERT
+    postSQL: ""
+    preSQL: ""
+    testsEnabled: true
+    truncateBefore: true
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: WORK
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6296e4-bffa-4371-af42-03fb857aeebb
+          stepCounter: b2af582e-0050-4b03-b1ce-27dc5e8a3265
+        config: {}
+        dataType: NUMBER(38,0)
+        description: SF*150,000 are populated
+        name: C_CUSTKEY
+        nullable: false
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 33eb8f63-e176-4f4e-970f-34f298bd9a15
+                stepCounter: cb96d0de-b513-4fd3-a739-5aead3df1f99
+            transform: ""
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          STG_CUSTOMER2: cb96d0de-b513-4fd3-a739-5aead3df1f99
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: WORK
+            nodeName: STG_CUSTOMER2
+        join:
+          joinCondition: FROM {{ ref('WORK', 'STG_CUSTOMER2') }} "STG_CUSTOMER2"
+        name: STG_CUSTOMER
+        noLinkRefs: []
+  name: STG_CUSTOMER
+  overrideSQL: false
+  schema: ""
+  sqlType: Stage
+  type: sql
+  version: 1
+type: Node
